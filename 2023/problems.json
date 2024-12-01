@@ -1,0 +1,167 @@
+{
+  "problems": [
+    {
+      "name": "day1",
+      "executor": "ruby",
+      "input_file": "inputs/day1.txt",
+      "test_input_file": "inputs/day1.test.txt"
+    },
+    {
+      "name": "day2",
+      "executor": "python",
+      "input_file": "inputs/day2.txt",
+      "test_input_file": "inputs/day2.test.txt"
+    },
+    {
+      "name": "day3",
+      "executor": "go",
+      "input_file": "inputs/day3.txt",
+      "test_input_file": "inputs/day3.test.txt"
+    },
+    {
+      "name": "day4",
+      "executor": "ts",
+      "input_file": "inputs/day4.txt",
+      "test_input_file": "inputs/day4.test.txt"
+    },
+    {
+      "name": "day5",
+      "executor": "rust",
+      "input_file": "inputs/day5.txt",
+      "test_input_file": "inputs/day5.test.txt"
+    },
+    {
+      "name": "day6",
+      "executor": "java",
+      "input_file": "inputs/day6.txt",
+      "test_input_file": "inputs/day6.test.txt"
+    },
+    {
+      "name": "day7",
+      "executor": "rust",
+      "input_file": "inputs/day7.txt",
+      "test_input_file": "inputs/day7.test.txt"
+    },
+    {
+      "name": "day8",
+      "executor": "ts",
+      "input_file": "inputs/day8.txt",
+      "test_input_file": "inputs/day8.test.txt"
+    },
+    {
+      "name": "day9",
+      "executor": "python",
+      "input_file": "inputs/day9.txt",
+      "test_input_file": "inputs/day9.test.txt"
+    },
+    {
+      "name": "day10",
+      "executor": "ruby",
+      "input_file": "inputs/day10.txt",
+      "test_input_file": "inputs/day10.test.txt"
+    },
+    {
+      "name": "day11",
+      "executor": "ruby",
+      "input_file": "inputs/day11.txt",
+      "test_input_file": "inputs/day11.test.txt"
+    }
+  ],
+  "executors": [
+    {
+      "name": "python",
+      "file_extension": "py",
+      "commands": [
+        {
+          "command": "python3",
+          "args": [
+            "${SOURCE_FILE}"
+          ]
+        }
+      ],
+      "template": "#!/usr/bin/env python3\nimport sys\n\nlines = sys.stdin.readlines()\nprint(lines)"
+    },
+    {
+      "name": "rust",
+      "file_extension": "rs",
+      "commands": [
+        {
+          "command": "rustc",
+          "args": [
+            "-o",
+            "${BIN_DIR}/${PROBLEM_NAME}",
+            "${SOURCE_FILE}"
+          ]
+        },
+        {
+          "command": "${BIN_DIR}/${PROBLEM_NAME}",
+          "args": []
+        }
+      ],
+      "template": "use std::io::Read;\n\nfn main() {\n    let mut input = String::new();\n    std::io::stdin().read_to_string(&mut input).unwrap();\n    println!(\"{}\", input);\n}"
+    },
+    {
+      "name": "ruby",
+      "file_extension": "rb",
+      "commands": [
+        {
+          "command": "ruby",
+          "args": [
+            "${SOURCE_FILE}"
+          ]
+        }
+      ],
+      "template": "lines = ARGF.read.split(\"\\n\").map(&:strip)\nputs lines"
+    },
+    {
+      "name": "go",
+      "file_extension": "go",
+      "commands": [
+        {
+          "command": "go",
+          "args": [
+            "run",
+            "${SOURCE_FILE}"
+          ]
+        }
+      ],
+      "template": "package main\n\nimport (\n    \"fmt\"\n    \"io\"\n    \"os\"\n    \"strings\"\n)\n\nfunc main() {\n    bytes, err := io.ReadAll(os.Stdin)\n    if err != nil {\n        panic(err)\n    }\n    lines := strings.Split(strings.TrimSpace(string(bytes)), \"\\n\")\n    fmt.Println(lines)\n}"
+    },
+    {
+      "name": "java",
+      "file_extension": "java",
+      "commands": [
+        {
+          "command": "javac",
+          "args": [
+            "-d",
+            "${BIN_DIR}",
+            "${SOURCE_FILE}"
+          ]
+        },
+        {
+          "command": "java",
+          "args": [
+            "-cp",
+            "${BIN_DIR}",
+            "${PROBLEM_NAME}"
+          ]
+        }
+      ],
+      "template": "import java.util.Scanner;\n\npublic class ${PROBLEM_NAME} {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        while (scanner.hasNextLine()) {\n            System.out.println(scanner.nextLine());\n        }\n    }\n}"
+    },
+    {
+      "name": "ts",
+      "file_extension": "ts",
+      "commands": [
+        {
+          "command": "bun",
+          "args": [
+            "${SOURCE_FILE}"
+          ]
+        }
+      ],
+      "template": "for await (const line of console) {\n  console.log(line);\n  process.stdout.write(prompt);\n}"
+    }
+  ]
+}
