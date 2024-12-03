@@ -9,7 +9,6 @@ if [[ $# -ne 1 && $# -ne 2 ]]; then
 fi
 
 if [[ "$1" = "-s" ]]; then
-    echo "Running in sample mode: $1"
     day=$2
     input_file=inputs/$day.sample.txt
 else
