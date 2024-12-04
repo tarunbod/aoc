@@ -21,8 +21,8 @@ removeOne :: [a] -> [[a]]
 removeOne list = do
   [take i list ++ drop (i + 1) list | i <- [0 .. length list - 1]]
 
-diffs :: (Integral a) => [a] -> [a]
-diffs = map (\x -> last x - head x) . init . transpose . take 2 . tails
+diffs :: (Num a) => [a] -> [a]
+diffs = map (foldl1 (-)) . init . transpose . take 2 . tails
 
 main = do
   contents <- getContents
