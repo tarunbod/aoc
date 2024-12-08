@@ -16,5 +16,11 @@ else
     input_file=inputs/$day.txt
 fi
 
-echo "Running $day.hs with input file $(basename "$input_file")"
-runhaskell "$day".hs < "$input_file"
+if [[ -f "$day.hs" ]]; then
+    echo "Running $day.hs with input file $(basename "$input_file")"
+    runhaskell "$day".hs < "$input_file"
+else
+    # run the ruby file
+    echo "Running $day.rb with input file $(basename "$input_file")"
+    ruby "$day".rb < "$input_file"
+fi
