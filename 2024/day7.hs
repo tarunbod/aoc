@@ -12,10 +12,8 @@ perform Concat a b = concatInts a b
 perform End _ _ = 0
 
 performOps :: [Int] -> [Op] -> Int
-performOps nums ops = do
-  let lst = zip nums ops
-  let (result, _) = foldl1 (\(n1, op1) (n2, op2) -> (perform op1 n1 n2, op2)) lst
-  result
+performOps nums ops =
+  fst $ foldl1 (\(n1, op1) (n2, op2) -> (perform op1 n1 n2, op2)) $ zip nums ops
 
 generateOps :: Bool -> Int -> [[Op]]
 generateOps withConcat n = case n of
