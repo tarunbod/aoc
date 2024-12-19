@@ -16,11 +16,13 @@ else
     input_file=inputs/$day.txt
 fi
 
-if [[ -f "$day.hs" ]]; then
+if [[ -f "$day.ml" ]]; then
+    echo "Running $day.ml with input file $(basename "$input_file")"
+    ocaml "$day".ml < "$input_file"
+elif [[ -f "$day.hs" ]]; then
     echo "Running $day.hs with input file $(basename "$input_file")"
     runhaskell "$day".hs < "$input_file"
 else
-    # run the ruby file
     echo "Running $day.rb with input file $(basename "$input_file")"
     ruby "$day".rb < "$input_file"
 fi
