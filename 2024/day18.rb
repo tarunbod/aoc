@@ -44,7 +44,6 @@ def bfs(grid)
     if p == start
       return [l, t, true]
     end
-    # puts p.inspect
     t << p
     p = parents[p]
     l += 1
